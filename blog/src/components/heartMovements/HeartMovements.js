@@ -15,8 +15,7 @@ const HeartMovements = ({ particlesArray, canvasRef }) => {
       }
     };
     const animate = () => {
-      ctx.fillStyle = "black";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       handleParticles();
       requestAnimationFrame(animate);
     };

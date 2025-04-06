@@ -21,7 +21,7 @@ const GenerateHearts = ({ canvasRef }) => {
     canvas.addEventListener("mousemove", (event) => {
       mouse.x = event.x;
       mouse.y = event.y;
-      for (let i = 0; i < 2; i++) {
+      for (let i = 0; i < 1; i++) {
         particlesArray.current.push(new Particle());
       }
     });
@@ -30,11 +30,22 @@ const GenerateHearts = ({ canvasRef }) => {
       constructor() {
         this.x = mouse.x;
         this.y = mouse.y;
-        this.radius = Math.random() * 80 + 1;
+        this.radius = Math.random() * 60 + 1;
         this.speedX = Math.random() * 2 - 1;
         this.speedY = Math.random() * 2 - 1;
-        const hue = Math.random() * 30 + 260; //and a purple
-        this.color = `hsl(${hue}, 100%, 50%)`;
+        this.color = ctx.createRadialGradient(
+          this.x,
+          this.y,
+          this.radius * 0.01, // Inner radius
+          this.x,
+          this.y,
+          this.radius // Outer radius
+        );
+        this.color.addColorStop(0, `hsl(${Math.random() * 30}, 100%, 70%)`);
+        this.color.addColorStop(
+          1,
+          `hsl(${Math.random() * 30 + 300}, 100%, 70%)`
+        );
       }
       update() {
         this.x += this.speedX;
@@ -46,6 +57,7 @@ const GenerateHearts = ({ canvasRef }) => {
 
       draw() {
         this.update();
+
         ctx.fillStyle = this.color;
         ctx.beginPath();
 
