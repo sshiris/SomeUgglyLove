@@ -1,5 +1,6 @@
-import React, { use, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Background.css";
+import GenerateHearts from "../generate_hearts/GenerateHearts";
 
 function Background() {
   const canvasRef = useRef(null);
@@ -11,8 +12,6 @@ function Background() {
     const setCanvasSize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      ctx.fillStyle = "black";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
     };
 
     setCanvasSize();
@@ -24,7 +23,12 @@ function Background() {
     };
   }, []);
 
-  return <canvas ref={canvasRef} Background-color="black"></canvas>;
+  return (
+    <div>
+      <canvas ref={canvasRef}></canvas>;
+      <GenerateHearts canvasRef={canvasRef} />
+    </div>
+  );
 }
 
 export default Background;
